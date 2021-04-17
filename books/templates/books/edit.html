@@ -1,5 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'books/base.html' %}
+{% load sekizai_tags static %}
+
 {% block content %}
+
+{% addtoblock "css" %}
+<link href="{% static 'css/books/theme.css' %}" media="screen" rel="stylesheet" type="text/css" />
+{% endaddtoblock %}
 
 <form action = "" method = "post">
   {% csrf_token %}

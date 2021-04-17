@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load sekizai_tags static %}
+
+{% block css %}
+{% addtoblock "css" %}
+<link href="{% static 'css/books/theme.css' %}" media="screen" rel="stylesheet" type="text/css" />
+{% endaddtoblock %}
+{% endblock css %}
+
+{% block content %}{% endblock content %}

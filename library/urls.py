@@ -1,3 +1,5 @@
+from django.conf import settings
+
 """library URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -21,3 +23,7 @@ urlpatterns = [
     path('books/', include(('books.urls', 'books'), namespace="books")),
     path('admin/', admin.site.urls),
 ]
+
+if settings.DEBUG:
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    urlpatterns += staticfiles_urlpatterns()
