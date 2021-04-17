@@ -3,7 +3,7 @@
 
 {% if books %}
 
-<div class="book-list">
+<div class="book-block">
     <ul>
     {% for book in books %}
         <li><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></li>
