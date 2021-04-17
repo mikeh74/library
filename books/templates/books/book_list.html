@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if books %}
+<ul>
+{% for book in books %}
+    <li><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No books listed.</p>
+{% endif %}
+
+<div>
+    <a href="{% url 'books:create' %}">Add a new book</a>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{ book.title }}</h1>
+<p>{{ book.author }}</p>
+
+<ul>
+{% for tag in book.tags.all %}
+<li>{{ tag.name }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'books:edit' book_id=book.id %}">Edit Book</a>
+
+{% endblock content %}
+
