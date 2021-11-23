@@ -22,6 +22,11 @@ class AuthorCreateView(CreateView):
     fields = ['forename', 'surname']
     success_url = reverse_lazy('books:author_list')
 
+class AuthorUpdateView(UpdateView):
+    model = Author
+    fields = ['forename', 'surname']
+    success_url = reverse_lazy('books:author_list')
+
 
 def index(request):
     books = Book.objects.all()

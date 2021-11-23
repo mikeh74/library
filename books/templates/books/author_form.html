@@ -1,20 +1,29 @@
 {% extends 'books/base.html' %}
 {% block content %}
+{% load crispy_forms_tags %}
 
-<div class="container">
+<div class="container mt-4">
 
-<div class="book-block">
+<div class="card bg-light">
 
-  <form action="" method="post">
+  <div class="card-body">
 
-    {% csrf_token %}
+    {% if object.pk %}
+    <h1>Update Author</h1
+    {% else %}
+    <h1>Add Author</h1
+    {% endif %}
 
-    {{ form }}
+    <form action="" method="post">
 
-    <button class="btn btn-primary" type="submit">Save</button>
-  </form>
+      {% csrf_token %}
 
-  <a class="btn btn-secondary" href="{% url 'books:author_list' %}">Cancel</a>
+      {{ form|crispy }}
+
+      <button class="btn btn-success" type="submit">Save</button>
+      <a class="btn btn-secondary" href="{% url 'books:author_list' %}">Cancel</a>
+    </form>
+  </div>
 
 </div>
 

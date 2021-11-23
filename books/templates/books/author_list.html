@@ -1,20 +1,27 @@
 {% extends 'books/base.html' %}
 {% block content %}
 
-{% if authors %}
+<div class="container">
+  <div class="card mt-4">
+    <div class="card-body bg-light">
 
-<div class="book-block">
-    <ul>
-    {% for author in authors %}
-        <li>{{ author }}</li>
-    {% endfor %}
-    </ul>
-    {% else %}
-    <p>No books listed.</p>
-    {% endif %}
-    <div class="actions">
-        <a class="btn" href="{% url 'books:author_add' %}">Add Author</a>
+      <h1 class="card-title">Authors</h1>
+      {% if authors %}
+      <ul>
+        {% for author in authors %}
+        <li><a href="{% url 'books:author_update' author.pk %}">{{ author }}</a></li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No books listed.</p>
+      {% endif %}
+      <div class="actions">
+        <a class="btn btn-primary" href="{% url 'books:author_add' %}">Add Author</a>
+        <a class="btn btn-secondary" href="{% url 'books:index' %}">Books</a>
+      </div>
+
     </div>
+  </div>
 </div>
 
 {% endblock content %}

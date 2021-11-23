@@ -3,19 +3,24 @@
 
 {% block content %}
 
-<div class="book-block">
-  <h1>{{ book.title }}</h1>
-  <p>{{ book.author }}</p>
-  
-  <ul>
-  {% for tag in book.tags.all %}
-  <li>{{ tag.name }}</li>
-  {% endfor %}
-  </ul>
-  
-  <div class="actions">
-    <a href="{% url 'books:edit' book_id=book.id %}">Edit Book</a>
-    <a class="btn" href="{% url 'books:index' %}">List books</a>
+<div class="container">
+  <div class="card bg-light mt-4">
+    <div class="card-body">
+
+      <h1>{{ book.title }}</h1>
+      <p>{{ book.author }}</p>
+
+      <ul>
+        {% for tag in book.tags.all %}
+        <li>{{ tag.name }}</li>
+        {% endfor %}
+      </ul>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="{% url 'books:edit' book_id=book.id %}">Edit</a>
+        <a class="btn btn-info" href="{% url 'books:index' %}">Back to Book list</a>
+      </div>
+    </div>
   </div>
 </div>
 
