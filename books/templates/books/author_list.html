@@ -1,0 +1,20 @@
+{% extends 'books/base.html' %}
+{% block content %}
+
+{% if authors %}
+
+<div class="book-block">
+    <ul>
+    {% for author in authors %}
+        <li>{{ author }}</li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No books listed.</p>
+    {% endif %}
+    <div class="actions">
+        <a class="btn" href="{% url 'books:author_add' %}">Add Author</a>
+    </div>
+</div>
+
+{% endblock content %}

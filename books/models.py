@@ -16,6 +16,9 @@ class Author(models.Model):
     def __str__(self) -> str:
         return "{} {}".format(self.forename, self.surname)
 
+    # def get_absolute_url(self):
+    #     return reverse("books:author_list")
+
 
 class Book(models.Model):
     title = models.CharField(max_length=120)
