@@ -20,10 +20,20 @@ class Author(models.Model):
     #     return reverse("books:author_list")
 
 
+BOOK_STATUS_CHOICES = (
+    ('i', 'In stock'),
+    ('o', 'On Loan'),
+)
+
+
 class Book(models.Model):
     title = models.CharField(max_length=120)
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, related_name='book_tags')
+    status = models.CharField(
+        max_length=50,
+        choices=BOOK_STATUS_CHOICES,
+        default=BOOK_STATUS_CHOICES[0][0])
 
     def get_absolute_url(self):
         return reverse("books:detail",
