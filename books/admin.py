@@ -15,11 +15,11 @@ class BookAdmin(admin.ModelAdmin):
     search_fields = ['title', 'author__forename', 'author__surname']
 
     # @admin.action(description='Indicate as out on loan')
-    def make_loaned(modeladmin, request, queryset):
+    def make_loaned(self, request, queryset):
         queryset.update(status='o')
 
     # @admin.action(description='Indicate as in stock')
-    def make_instock(modeladmin, request, queryset):
+    def make_instock(self, request, queryset):
         queryset.update(status='i')
 
 

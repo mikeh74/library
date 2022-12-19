@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+from ..utils import my_function
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
@@ -9,21 +10,20 @@ class Tag(models.Model):
         return self.name
 
 
-class Author(models.Model):
-    forename = models.CharField(max_length=60)
-    surname = models.CharField(max_length=60)
-
-    def __str__(self) -> str:
-        return "{} {}".format(self.forename, self.surname)
-
-    # def get_absolute_url(self):
-    #     return reverse("books:author_list")
 
 
 BOOK_STATUS_CHOICES = (
     ('i', 'In stock'),
     ('o', 'On Loan'),
 )
+
+
+class BookInStockManager(models.Manager):
+    def get_queryset(self):
+        q = super().get_queryset()
+        q = q.filter(status='i')
+
+        return q
 
 
 class Book(models.Model):
@@ -35,9 +35,15 @@ class Book(models.Model):
         choices=BOOK_STATUS_CHOICES,
         default=BOOK_STATUS_CHOICES[0][0])
 
+    objects = models.Manager()  # The default manager.
+    active = BookInStockManager()
+
     def get_absolute_url(self):
         return reverse("books:detail",
                        kwargs={"book_id": self.pk})
 
     def __str__(self) -> str:
         return self.title
+
+class Category(models.Model):
+    name = models.CharField(max_length=120)
