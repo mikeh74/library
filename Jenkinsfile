@@ -8,9 +8,7 @@ pipeline {
             steps {
                 echo 'Copying eslint report'
                 sh '''
-                cat /code/build/reports/eslint.xml > eslint.xml
-                cat /code/build/reports/stylelint.xml > stylelint.xml
-                cat /code/build/reports/pylint.log > pylint.log
+                make image
                 '''
             }
         }
