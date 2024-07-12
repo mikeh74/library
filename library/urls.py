@@ -1,5 +1,7 @@
 from django.conf import settings
 
+from library import views
+
 """library URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -20,6 +22,7 @@ from django.urls import path
 from django.urls.conf import include
 
 urlpatterns = [
+    path('', views.home, name='home'),
     path('books/', include(('books.urls', 'books'), namespace="books")),
     path('admin/', admin.site.urls),
 ]
