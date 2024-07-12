@@ -15,6 +15,7 @@ WORKDIR /code
 RUN pip install --upgrade pip
 COPY requirements.txt /code/
 
+# Install python requirements
 # We don't need to cache packages
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -27,8 +28,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 WORKDIR /code
 # We don't copy code here as we're only using for local development
 
-# Install gcc for installing and building python packages
-# and libmysqlclient-dev for mysqlclient
+# Install gcc and libmysqlclient-dev for mysqlclient
 RUN apt-get update \
   && apt-get install -y --no-install-recommends build-essential gcc \
   default-libmysqlclient-dev python3-dev \

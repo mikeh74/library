@@ -1,5 +1,7 @@
 flake8
 Django>=4.2,<5.0
+django-sekizai
 toml
 django-crispy-forms
 crispy-bootstrap4
+sqlparse>=0.5.0
