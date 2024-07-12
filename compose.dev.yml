@@ -1,0 +1,16 @@
+version: "3.9"
+
+# This is the dockerfile for local development
+services:
+  web:
+    build:
+      context: .
+      target: $(DOCKER_TAG)
+      tags:
+        # use environment variable to switch between dev and prod
+        - "$(IMAGE_NAME):$(DOCKER_TAG)"
+    container_name: $(IMAGE_NAME)
+    volumes:
+      - .:/code/
+    ports:
+      - "8000:8000"
