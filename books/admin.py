@@ -1,10 +1,12 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.admin.widgets import FilteredSelectMultiple
-from .models import Tag, Author, Book
+from books.models import Author, Book, Tag
+
 # Register your models here.
 
 # admin.site.register(Tag)
+
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
@@ -60,5 +62,6 @@ class TagAdminForm(forms.ModelForm):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     form = TagAdminForm
+
 
 admin.site.register(Author)
