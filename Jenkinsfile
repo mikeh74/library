@@ -7,11 +7,10 @@ pipeline {
     // }
     agent any
     stages {
-        stage('Make image') {
+        stage('Make container') {
             steps {
-                echo 'Copying eslint report'
+                echo 'docker build'
                 sh '''
-                make build
                 docker build -t library:latest . --target prod
                  '''
             }
