@@ -2,6 +2,7 @@
 // https://mdyzma.github.io/2017/10/14/python-app-and-jenkins/
 
 pipeline {
+    agent any
     stages {
         stage('Make image') {
             steps {
