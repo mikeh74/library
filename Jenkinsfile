@@ -12,8 +12,7 @@ pipeline {
                 echo 'Copying eslint report'
                 sh '''
                 docker build -t library:latest . --target prod
-                // make image
-                '''
+                 '''
             }
         }
         // stage('Test') {
