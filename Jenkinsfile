@@ -11,6 +11,7 @@ pipeline {
             steps {
                 echo 'Copying eslint report'
                 sh '''
+                make build
                 docker build -t library:latest . --target prod
                  '''
             }
