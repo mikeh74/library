@@ -2,13 +2,17 @@
 // https://mdyzma.github.io/2017/10/14/python-app-and-jenkins/
 
 pipeline {
+    // agent {
+    //     dockerfile { filename 'Dockerfile.build' }
+    // }
     agent any
     stages {
         stage('Make image') {
             steps {
                 echo 'Copying eslint report'
                 sh '''
-                make image
+                docker build -t library:latest . --target prod
+                // make image
                 '''
             }
         }
