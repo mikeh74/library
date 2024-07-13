@@ -19,6 +19,7 @@ pipeline {
             steps {
                 echo 'docker run'
                 sh '''
+                docker tag library:latest localhost:5050/library:latest
                 docker push localhost:5050/library:latest
                 '''
             }
