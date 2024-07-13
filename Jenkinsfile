@@ -6,10 +6,10 @@ pipeline {
     //     dockerfile { filename 'Dockerfile.build' }
     // }
     agent any
-    environment {
-        // DOCKER_REGISTRY = 'docker-registry'
-        // DOCKER_CREDENTIALS_ID = 'docker-hub-token'
-    }
+    // environment {
+    //     // DOCKER_REGISTRY = 'docker-registry'
+    //     // DOCKER_CREDENTIALS_ID = 'docker-hub-token'
+    // }
     stages {
         stage('Build container') {
             steps {
