@@ -7,7 +7,7 @@ pipeline {
     // }
     agent any
     environment {
-        DOCKER_REGISTRY = 'docker-registry'
+        // DOCKER_REGISTRY = 'docker-registry'
         // DOCKER_CREDENTIALS_ID = 'docker-hub-token'
     }
     stages {
@@ -49,7 +49,7 @@ pipeline {
                     ]
                 ) {
                         sh 'echo $DOCKER_PASSWORD | docker login \
-                        $DOCKER_REGISTRY -u $DOCKER_USERNAME --password-stdin'
+                        -u $DOCKER_USERNAME --password-stdin'
                     }
                 }
             }
