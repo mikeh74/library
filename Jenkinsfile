@@ -15,9 +15,17 @@ pipeline {
                  '''
             }
         }
-        stage('Push container') {
+        stage('Run tests') {
             steps {
                 echo 'docker run'
+                sh '''
+                docker run library:latest python manage.py test
+                '''
+            }
+        }
+        stage('Push container') {
+            steps {
+                echo 'docker push'
                 sh '''
                 docker tag library:latest localhost:5050/library:latest
                 docker push localhost:5050/library:latest
