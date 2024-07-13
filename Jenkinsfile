@@ -19,7 +19,7 @@ pipeline {
             steps {
                 echo 'docker run'
                 sh '''
-                docker push https://localhost:5050/library:latest
+                docker push localhost:5050/library:latest
                 '''
             }
         }
