@@ -15,6 +15,14 @@ pipeline {
                  '''
             }
         }
+        stage('Push container') {
+            steps {
+                echo 'docker run'
+                sh '''
+                docker push https://localhost:5050/library:latest
+                '''
+            }
+        }
         // stage('Test') {
         //     steps {
         //         sh 'python manage.py test'
