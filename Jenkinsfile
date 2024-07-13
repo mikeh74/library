@@ -59,8 +59,8 @@ pipeline {
             steps {
                 echo 'docker push'
                 sh '''
-                docker tag library:latest localhost:5050/library:latest
-                docker push localhost:5050/library:latest
+                docker tag library:latest mikeh74/library:latest
+                docker push mikeh74/library:latest
                 '''
             }
         }
