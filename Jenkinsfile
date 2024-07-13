@@ -7,7 +7,7 @@ pipeline {
     // }
     agent any
     environment {
-        DOCKER_REGISTRY = 'docker-registry:5060' // e.g., 'https://index.docker.io/v1/'
+        DOCKER_REGISTRY = 'https://docker-registry:5060' // e.g., 'https://index.docker.io/v1/'
         DOCKER_CREDENTIALS_ID = 'docker-registry-credentials'
     }
     stages {
@@ -33,8 +33,7 @@ pipeline {
                 script {
                     withCredentials([
                         usernamePassword(
-                            // credentialsId: $DOCKER_CREDENTIALS_ID,
-                            credentialsId: $DOCKER_CREDENTIALS_ID,
+                            credentialsId: '$DOCKER_CREDENTIALS_ID',
                             usernameVariable: 'DOCKER_USERNAME',
                             passwordVariable: 'DOCKER_PASSWORD'
                         )
