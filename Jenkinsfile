@@ -31,18 +31,16 @@ pipeline {
         stage('Login to Docker Registry') {
             steps {
                 script {
-                    withCredentials(
-                        [
-                            usernamePassword(
-                                credentialsId: $DOCKER_CREDENTIALS_ID,
-                                usernameVariable: 'DOCKER_USERNAME',
-                                passwordVariable: 'DOCKER_PASSWORD')
-                        ]
-                    )
-                    {
-                        'sh echo $DOCKER_PASSWORD | docker login $DOCKER_REGISTRY -u $DOCKER_USERNAME --password-stdin'
-                    }
-                }
+                    withCredentials([
+                        usernamePassword(
+                            // credentialsId: $DOCKER_CREDENTIALS_ID,
+                            credentialsId: 'docker-registry-credentials',
+                            usernameVariable: 'DOCKER_USERNAME',
+                            passwordVariable: 'DOCKER_PASSWORD'
+                        )
+                    ]) {
+                        sh 'echo $DOCKER_PASSWORD | docker login $DOCKER_REGISTRY -u $DOCKER_USERNAME --password-stdin'
+                    }                }
             }
         }
 
