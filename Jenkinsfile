@@ -7,7 +7,7 @@ pipeline {
     // }
     agent any
     environment {
-        DOCKER_REGISTRY = 'localhost:5000' // e.g., 'https://index.docker.io/v1/'
+        DOCKER_REGISTRY = 'localhost:5050' // e.g., 'https://index.docker.io/v1/'
         DOCKER_CREDENTIALS_ID = 'docker-registry-credentials'
     }
     stages {
