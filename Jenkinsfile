@@ -8,7 +8,7 @@ pipeline {
     agent any
     environment {
         DOCKER_REGISTRY = 'docker-registry'
-        DOCKER_CREDENTIALS_ID = 'docker-registry-credentials'
+        // DOCKER_CREDENTIALS_ID = 'docker-hub-token'
     }
     stages {
         stage('Build container') {
@@ -42,7 +42,7 @@ pipeline {
                 script {
                     withCredentials([
                         usernamePassword(
-                            credentialsId: 'docker-registry-credentials',
+                            credentialsId: 'docker-hub-token',
                             usernameVariable: 'DOCKER_USERNAME',
                             passwordVariable: 'DOCKER_PASSWORD'
                         )
