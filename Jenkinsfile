@@ -33,7 +33,7 @@ pipeline {
                 script {
                     withCredentials([
                         usernamePassword(
-                            credentialsId: '$DOCKER_CREDENTIALS_ID',
+                            credentialsId: 'docker-registry-credentials',
                             usernameVariable: 'DOCKER_USERNAME',
                             passwordVariable: 'DOCKER_PASSWORD'
                         )
