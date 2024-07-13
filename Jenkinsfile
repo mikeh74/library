@@ -27,7 +27,16 @@ pipeline {
                 '''
             }
         }
-
+        stage('Gether information') {
+            steps {
+                echo 'docker inspect'
+                sh '''
+                # get ip address of the agent container
+                AGENT_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' agent)
+                echo $AGENT_IP
+                '''
+            }
+        }
         stage('Login to Docker Registry') {
             steps {
                 script {
