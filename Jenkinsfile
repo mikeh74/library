@@ -6,8 +6,12 @@ pipeline {
     //     dockerfile { filename 'Dockerfile.build' }
     // }
     agent any
+    environment {
+        DOCKER_REGISTRY = 'localhost:5000' // e.g., 'https://index.docker.io/v1/'
+        DOCKER_CREDENTIALS_ID = 'docker-registry-credentials'
+    }
     stages {
-        stage('Make container') {
+        stage('Build container') {
             steps {
                 echo 'docker build'
                 sh '''
@@ -23,6 +27,17 @@ pipeline {
                 '''
             }
         }
+
+        stage('Login to Docker Registry') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "echo ${DOCKER_PASSWORD} | docker login ${DOCKER_REGISTRY} -u ${DOCKER_USERNAME} --password-stdin"
+                    }
+                }
+            }
+        }
+
         stage('Push container') {
             steps {
                 echo 'docker push'
@@ -32,11 +47,15 @@ pipeline {
                 '''
             }
         }
-        // stage('Test') {
-        //     steps {
-        //         sh 'python manage.py test'
-        //     }
-        // }
+
+        stage('Logout from Docker Registry') {
+            steps {
+                script {
+                    sh 'docker logout ${DOCKER_REGISTRY}'
+                }
+            }
+        }
+
         // stage('Code Coverage') {
         //     steps {
         //         echo 'Run and output code coverage report'
@@ -69,17 +88,7 @@ pipeline {
             echo 'Clean up'
         }
         success {
-            echo 'Code to run on success'
-            // recordIssues(
-            //     tool: checkStyle(pattern: '**/*.xml'),
-            //     enabledForFailure: true,
-            // )
-            // // https://stackoverflow.com/questions/41875412/use-pylint-on-jenkins-with-warnings-plugin-and-pipeline
-            // recordIssues(
-            //     tool: pyLint(pattern: '**/pylint.log'),
-            //     enabledForFailure: true,
-            //     aggregatingResults: true,
-            // )
+            echo 'Code to run on success - this could be deployment or notifications'
         }
         failure {
             echo 'Send notifications'
