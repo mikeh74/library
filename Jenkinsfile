@@ -2,10 +2,12 @@
 // https://mdyzma.github.io/2017/10/14/python-app-and-jenkins/
 
 pipeline {
-    // agent {
-    //     dockerfile { filename 'Dockerfile.build' }
-    // }
-    agent any
+    agent {
+        docker {
+            image 'python:3.10'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
     // environment {
     //     // DOCKER_REGISTRY = 'docker-registry'
     //     // DOCKER_CREDENTIALS_ID = 'docker-hub-token'
@@ -24,16 +26,6 @@ pipeline {
                 echo 'docker run'
                 sh '''
                 docker run library:latest python manage.py test
-                '''
-            }
-        }
-        stage('Gether information') {
-            steps {
-                echo 'docker inspect'
-                sh '''
-                # get ip address of the agent container
-                AGENT_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' agent)
-                echo $AGENT_IP
                 '''
             }
         }
@@ -72,32 +64,6 @@ pipeline {
                 }
             }
         }
-
-        // stage('Code Coverage') {
-        //     steps {
-        //         echo 'Run and output code coverage report'
-        //         sh '''
-        //         echo "Code coverage"
-        //         python -m coverage run --source='.' manage.py test
-        //         coverage xml -o reports/coverage.xml
-        //         '''
-        //     }
-        //     post {
-        //         always {
-        //             step([$class: 'CoberturaPublisher',
-        //         autoUpdateHealth: false,
-        //         autoUpdateStability: false,
-        //         coberturaReportFile: 'reports/coverage.xml',
-        //         failUnhealthy: false,
-        //         failUnstable: false,
-        //         maxNumberOfBuilds: 0,
-        //         onlyStable: false,
-        //         sourceEncoding: 'ASCII',
-        //         zoomCoverageChart: false
-        //         ])
-        //         }
-        //     }
-        // }
     }
 
     post {
